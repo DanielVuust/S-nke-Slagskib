@@ -13,6 +13,7 @@ namespace Sænke_Slagskib
             coordinates.Add("A1");
             coordinates.Add("A2");
             coordinates.Add("A3");
+            
             program.ShowBoard(logic);
             
             logic.SetUpShip(coordinates);
