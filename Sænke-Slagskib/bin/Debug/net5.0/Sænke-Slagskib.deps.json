@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Sænke-Slagskib/1.0.0": {
+        "runtime": {
+          "Sænke-Slagskib.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Sænke-Slagskib/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
