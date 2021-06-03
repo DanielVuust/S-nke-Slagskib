@@ -9,11 +9,13 @@ namespace Sænke_Slagskib
     public class PlayerBoard
     {
         public Dictionary<string, string> board = new Dictionary<string, string>();
+        public int rows = 4;
+        public int columns = 4;
         
         public PlayerBoard()
         {
-            
-            for(int i = 65; i<70;i++)
+            int n = 65;
+            for(int i = n; i < n + rows; i++)
             {
                 //Console.WriteLine();
                 for (int j = 1; j<5;j++)
