@@ -25,16 +25,9 @@ namespace Sænke_Slagskib
                     //Makes it so the first ship has a length of 2 then 3 then 4 then 5.
                     for (int k = 0; k-1 < j;k++)
                     {
-                        try
-                        {
-                            string shipCoordinate = Console.ReadLine();
-                            //Adds the coordinate written by the player to the shipCoordinates list.
-                            shipCoordinates.Add(shipCoordinate);
-                        }catch
-                        {
-
-                        }
-                        
+                        string shipCoordinate = Console.ReadLine();
+                        //Adds the coordinate written by the player to the shipCoordinates list.
+                        shipCoordinates.Add(shipCoordinate);
                     }
                     //Determens witch PlayerBoard the ship will be added to.
                     if (i == 1)
