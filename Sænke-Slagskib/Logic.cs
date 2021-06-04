@@ -18,8 +18,7 @@ namespace Sænke_Slagskib
             {
                 playerBoard1 = data.UpdatePlayerBoard(playerBoard1, ship);
             }
-            
-            return true; 
+            return true;
         }
         public bool SetUpShipOnBoard2(List<string> coordinates)
         {
@@ -61,10 +60,24 @@ namespace Sænke_Slagskib
             }
 
         }
-        public int ShipPartsLeft(PlayerBoard player)
+        private int ShipPartsLeft(PlayerBoard player)
         {
             Data data = new Data();
             return data.ShipPartsLeft(player);
+        }
+        public bool CheckScore(PlayerBoard player)
+        {
+            if (ShipPartsLeft(player) <= 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+
         }
 
     }
