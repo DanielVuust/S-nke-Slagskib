@@ -6,66 +6,68 @@ using System.Threading.Tasks;
 
 namespace Sænke_Slagskib
 {
-    class Logic
+    public static class Logic
     {
-        public PlayerBoard playerBoard1 = new PlayerBoard();
-        public PlayerBoard playerBoard2 = new PlayerBoard();
-        public bool SetUpShipOnBoard1(List<string> coordinates)
+        public static List<PlayerBoard> Players = new List<PlayerBoard>()
         {
-            Data data = new Data();
-            Ship ship = new Ship(coordinates);
-            if (!data.ChechPlayerBoard(playerBoard1, ship))
-            {
-                playerBoard1 = data.UpdatePlayerBoard(playerBoard1, ship);
-            }
-            return true;
-        }
-        public bool SetUpShipOnBoard2(List<string> coordinates)
+            new PlayerBoard("Player1"),
+            new PlayerBoard("Player2")
+        };
+        
+        //This defines the number and length of ships on the board.
+        public static readonly List<int> LengthOfShips = new List<int>()
         {
-            Data data = new Data();
-            Ship ship = new Ship(coordinates);
-            if (!data.ChechPlayerBoard(playerBoard2, ship))
-            {
-                playerBoard2 = data.UpdatePlayerBoard(playerBoard2, ship);
-            }
-            return true;
-        }
-        public string Player1Shoot(string coordinate)
-        {
-            Data data = new Data();
-            if (data.CheckCoordinate(playerBoard2, coordinate))
-            {
-                playerBoard2 = data.ShootOnOccupied(playerBoard2, coordinate);
-                return "HIT on " + coordinate;
-            }
-            else
-            {
-                playerBoard2 = data.ShootOnEmpty(playerBoard2, coordinate);
-                return "MISS on " + coordinate;
-            }
-                
-        }
-        public string Player2Shoot(string coordinate)
-        {
-            Data data = new Data();
-            if (data.CheckCoordinate(playerBoard1, coordinate))
-            {
-                playerBoard1 = data.ShootOnOccupied(playerBoard1, coordinate);
-                return "HIT on " + coordinate;
-            }
-            else
-            {
-                playerBoard1 = data.ShootOnEmpty(playerBoard1, coordinate);
-                return "MISS on " + coordinate;
-            }
+            2,
+            2,
+        };
 
+        public static bool SetUpShipOnBoard(PlayerBoard player, List<string> coordinates)
+        {
+            
+            
+            
+            Data data = new Data();
+            Ship ship = new Ship(coordinates);
+            
+            //Converts all the coordinates to upper.
+            coordinates = coordinates.ConvertAll(x => x.ToUpper());
+                  
+            //Checks if any of the ships coordinates is already occupied.
+            if (data.ChechPlayerBoard(player, ship)) return false;
+            
+            //Makes a new playerBoard and changes the board
+            player = data.UpdatePlayerBoard(player, ship);
+            
+            
+            
+            //Returns true that signifies that the ship creation was successfully.
+            return true;
         }
-        private int ShipPartsLeft(PlayerBoard player)
+
+        public static string PlayerShoot(PlayerBoard player, string coordinate)
+        {
+            
+            Data data = new Data();
+
+            player = data.Shoot(player, coordinate);
+
+            Players[Players.FindIndex(x => x.Name.Equals(player.Name))] = player;
+            
+            if (data.CheckCoordinate(player, coordinate))
+            {
+                return "HIT on " + coordinate;
+            }
+            else
+            {
+                return "Miss on " + coordinate;
+            }
+        }
+        private static int ShipPartsLeft(PlayerBoard player)
         {
             Data data = new Data();
             return data.ShipPartsLeft(player);
         }
-        public bool CheckScore(PlayerBoard player)
+        public static bool CheckScore(PlayerBoard player)
         {
             if (ShipPartsLeft(player) <= 0)
             {
@@ -75,10 +77,6 @@ namespace Sænke_Slagskib
             {
                 return false;
             }
-
-
-
         }
-
     }
 }

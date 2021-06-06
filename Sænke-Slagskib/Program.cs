@@ -1,148 +1,139 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Sænke_Slagskib
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         { 
-            Logic logic = new Logic();
+            
             Program program = new Program();
-            int numberOfShips = 2;
-            string coordinate;
+            
+            
             
             //One loop for each of the players.
-            for (int i = 1; i<=2;i++)
+            
+            program.OutputPlayerBoard(Logic.Players[0]);
+            program.OutputPlayerBoard(Logic.Players[1]);
+            program.SetUpShips();
+
+            //OutPuts the PlayerBoard to the console.
+            program.OutputPlayerBoard(Logic.Players[0]);
+            program.OutputPlayerBoard(Logic.Players[1]);
+
+            //While the game is not won by either of the players.
+            while (true)
             {
-                Console.WriteLine($"Player {i} pick ship placements");
-                //One loop for each ship that will be created, NumberOfShip determens the number of ships.
-                for (int j = 1; j <= numberOfShips; j++)
+                foreach (PlayerBoard player in Logic.Players.ToList())
                 {
-                    Console.WriteLine($"Pick placement for ship nr {j}");
-                    //List of coordinates for the diffrent ships.
-                    List<string> shipCoordinates = new List<string>();
-                    //Makes it so the first ship has a length of 2 then 3 then 4 then 5.
-                    for (int k = 0; k-1 < j;k++)
+                    Console.WriteLine($"{player.Name}'s turn \nWrite the coordinate you want to hit");
+                    
+                    string coordinate = Console.ReadLine();
+                    
+                    Console.WriteLine(Logic.PlayerShoot(player, coordinate));
+
+                    program.OutputPlayerBoard(Logic.Players[0]);
+                    program.OutputPlayerBoard(Logic.Players[1]);
+                    if (Logic.CheckScore(Logic.Players[1]))
                     {
+                        Console.WriteLine("Player 1 won");
+                        break;
+                    }
+
+                    Console.WriteLine("Plater2's turnv \nWrite the cordinate you want to hit");
+                    coordinate = Console.ReadLine();
+                    Console.WriteLine(Logic.PlayerShoot(Logic.Players[1], coordinate));
+
+                    program.OutputPlayerBoard(Logic.Players[0]);
+                    program.OutputPlayerBoard(Logic.Players[1]);
+                    if (Logic.CheckScore(Logic.Players[0]))
+                    {
+                        Console.WriteLine("Player 2 won");
+                        break;
+                    }
+                }
+            }
+
+            
+        }
+
+        private void SetUpShips()
+        {
+            foreach (PlayerBoard player in Logic.Players.ToList())
+            {
+                Console.WriteLine($"{player.Name} where to place your ships");
+                
+                //One loop for each ship that will be created for each player, NumberOfShip determines the number of ships on each board.
+                foreach (int shipLength in Logic.LengthOfShips)
+                {
+                    //List of coordinates for one ship.
+                    List<string> shipCoordinates = new List<string>();
+
+                    Console.WriteLine($"Pick placement for a ship with a length of {shipLength}");
+                    
+                    //Makes it so the first ship has a length of 2 then 3 then 4 then 5.
+                    for (int i = 1; i <= shipLength; i++)
+                    {
+                        Console.WriteLine($"Pick placement for coordinate {i}");
+                        
                         string shipCoordinate = Console.ReadLine();
                         //Adds the coordinate written by the player to the shipCoordinates list.
                         shipCoordinates.Add(shipCoordinate);
                     }
-                    //Determens witch PlayerBoard the ship will be added to.
-                    if (i == 1)
-                    {
-                        logic.SetUpShipOnBoard1(shipCoordinates);
-                    }
-                    else if (i == 2)
-                    {
-                        logic.SetUpShipOnBoard2(shipCoordinates);
-                    }
-                    //OutPuts the PlayerBoard to the console.
-                    program.ShowPlayerBoard1(logic.playerBoard1);
-                    program.ShowPlayerBoard2(logic.playerBoard2);
+                    
+                    //Sets op a ship on the specific player board.
+                    Logic.SetUpShipOnBoard(player, shipCoordinates);
                 }
             }
-            //OutPuts the PlayerBoard to the console.
-            program.ShowPlayerBoard1(logic.playerBoard1);
-            program.ShowPlayerBoard2(logic.playerBoard2);
-
-            //While the game is not won by either of the players.
-            while (true)
-            { 
-                Console.WriteLine("Plater1's turnv \nWrite the cordinate you want to hit");
-                coordinate = Console.ReadLine();
-                Console.WriteLine(logic.Player1Shoot(coordinate));
-
-                program.ShowPlayerBoard1(logic.playerBoard1);
-                program.ShowPlayerBoard2(logic.playerBoard2);
-                if (logic.CheckScore(logic.playerBoard2))
-                {
-                    Console.WriteLine("Player 1 won");
-                    break;
-                }
-
-                Console.WriteLine("Plater2's turnv \nWrite the cordinate you want to hit");
-                coordinate = Console.ReadLine();
-                Console.WriteLine(logic.Player2Shoot(coordinate));
-
-                program.ShowPlayerBoard1(logic.playerBoard1);
-                program.ShowPlayerBoard2(logic.playerBoard2);
-                if (logic.CheckScore(logic.playerBoard1))
-                {
-                    Console.WriteLine("Player 2 won");
-                    break;
-                }
-
-            }
-            
-
-            
         }
         
-        private void ShowPlayerBoard1(PlayerBoard player)
+        private void OutputPlayerBoard(PlayerBoard player)
         {
-            Program program = new Program();
-            Console.WriteLine("----------- player1 -----------");
+            
+            Console.WriteLine($"----------- {player.Name} -----------");
             int i = 0;
-            foreach (KeyValuePair<string, string> coordinate in player.board)
+            foreach (KeyValuePair<string, string> coordinate in player.Board)
             {
-                program.OutputColorOfCoordinates(coordinate);
+                //Outputs the coordinate in the right color 
+                OutputColorOfCoordinates(coordinate);
+                
                 i++;
-                if (i > 3)
-                {
-                    Console.WriteLine();
-                    i = 0;
-                }
+                if (i % PlayerBoard.Rows == 0 ) Console.WriteLine();
             }
         }
-        private void ShowPlayerBoard2(PlayerBoard player)
-        {
-            Program program = new Program();
-            Console.WriteLine("----------- player2 -----------");
-            int i = 0;
-            foreach (KeyValuePair<string, string> coordinate in player.board)
-            {
-                program.OutputColorOfCoordinates(coordinate);
-                i++;
-                if (i > 3)
-                {
-                    i = 0;
-                    Console.WriteLine();
-                }
-            }
-        }
+        
         /// <summary>
-        ///     Outputs the coordinate to the console in the right color by the value of the key
+        ///     Outputs the coordinate to the console in the right color determent by the value of the key
         /// </summary>
-        /// <param name="coordinate">The coordinate that will be outoutted in the console </param>
+        /// <param name="coordinate">The coordinate that will be outputted in the console </param>
         private void OutputColorOfCoordinates(KeyValuePair<string, string> coordinate)
         {
-            //If the value is occupied then the font color will be Green.
-            if (coordinate.Value == "occupied")
+            switch (coordinate.Value)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write(coordinate.Key + " ");
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-            //If the value is hit then the font color will be Red.
-            else if (coordinate.Value == "hit")
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write(coordinate.Key + " ");
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-            //If the value is miss then the font color will be DarkGray.
-            else if (coordinate.Value == "miss")
-            {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.Write(coordinate.Key + " ");
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-            //If the value is empty then the font color will be the default color white.
-            else
-            {
-                Console.Write(coordinate.Key + " ");
+                //If the value is occupied then the font color will be Green.
+                case "occupied":
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(coordinate.Key + " ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
+                //If the value is hit then the font color will be Red.
+                case "hit":
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(coordinate.Key + " ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
+                //If the value is miss then the font color will be DarkGray.
+                case "miss":
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.Write(coordinate.Key + " ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
+                //If the value is empty then the font color will be the default color white.
+                default:
+                    Console.Write(coordinate.Key + " ");
+                    break;
             }
         }
     }

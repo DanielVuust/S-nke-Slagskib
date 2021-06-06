@@ -10,9 +10,9 @@ namespace Sænke_Slagskib
     {
         public bool ChechPlayerBoard(PlayerBoard player, Ship ship)
         {
-            foreach (string coordinate in ship.coordinates)
+            foreach (string coordinate in ship.Coordinates)
             {
-                if (player.board[coordinate] != "empty")
+                if (player.Board[coordinate] != "empty")
                 {
                     return true;
                 }
@@ -21,35 +21,36 @@ namespace Sænke_Slagskib
         }
         public PlayerBoard UpdatePlayerBoard(PlayerBoard player, Ship ship)
         {
-            foreach (string coordinate in ship.coordinates)
+            foreach (string coordinate in ship.Coordinates)
             {
-                player.board[coordinate] = "occupied";
+                player.Board[coordinate] = "occupied";
             }
+
+            Logic.Players.Where(x => x.Name == player.Name).ToList().ForEach(x=>x=player);
             return player;
         }
         public bool CheckCoordinate(PlayerBoard player, string coordinate)
         {
-            if (player.board[coordinate] == "occupied")
+            return player.Board[coordinate] == "hit";
+        }
+        public PlayerBoard Shoot(PlayerBoard player, string coordinate)
+        {
+            switch (player.Board[coordinate])
             {
-                return true;
+                case "occupied":
+                    player.Board[coordinate] = "hit";
+                    break;
+                case "empty":
+                    player.Board[coordinate] = "miss";
+                    break;
             }
-            else
-                return false;
-        }
-        public PlayerBoard ShootOnOccupied(PlayerBoard player, string coordinate)
-        {
-            player.board[coordinate] = "hit";
             return player;
         }
-        public PlayerBoard ShootOnEmpty(PlayerBoard player, string coordinate)
-        {
-            player.board[coordinate] = "miss";
-            return player;
-        }
+       
         public int ShipPartsLeft(PlayerBoard player)
         {
             int NumberOfShipPartsLeft = 0;
-            foreach (KeyValuePair<string, string> coordinate in player.board)
+            foreach (KeyValuePair<string, string> coordinate in player.Board)
             {
                 if(coordinate.Value == "occupied")
                 {

@@ -8,20 +8,22 @@ namespace Sænke_Slagskib
 {
     public class PlayerBoard
     {
-        public Dictionary<string, string> board = new Dictionary<string, string>();
-        public int rows = 4;
-        public int columns = 4;
+        public readonly string Name;
+        public readonly Dictionary<string, string> Board = new Dictionary<string, string>();
+        public const int Rows = 4;
+        public const int Columns = 4;
         
-        public PlayerBoard()
+        public PlayerBoard(string name)
         {
+            this.Name = name;
             int n = 65;
-            for(int i = n; i < n + rows; i++)
+            for(int i = n; i < n + Rows; i++)
             {
                 for (int j = 1; j<5;j++)
                 {
                     string column = ((char)i).ToString();
-                    string cordinate = column + j;
-                    board.Add(cordinate, "empty");
+                    string coordinate = column + j;
+                    Board.Add(coordinate, "empty");
                 }
             }
             

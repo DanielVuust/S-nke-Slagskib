@@ -5,7 +5,6 @@ C:\Users\danie\source\repos\Sænke-Slagskib\Sænke-Slagskib\bin\Debug\net5.0\Sæ
 C:\Users\danie\source\repos\Sænke-Slagskib\Sænke-Slagskib\bin\Debug\net5.0\Sænke-Slagskib.dll
 C:\Users\danie\source\repos\Sænke-Slagskib\Sænke-Slagskib\bin\Debug\net5.0\ref\Sænke-Slagskib.dll
 C:\Users\danie\source\repos\Sænke-Slagskib\Sænke-Slagskib\bin\Debug\net5.0\Sænke-Slagskib.pdb
-C:\Users\danie\source\repos\Sænke-Slagskib\Sænke-Slagskib\obj\Debug\net5.0\Sænke-Slagskib.csprojAssemblyReference.cache
 C:\Users\danie\source\repos\Sænke-Slagskib\Sænke-Slagskib\obj\Debug\net5.0\Sænke-Slagskib.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\danie\source\repos\Sænke-Slagskib\Sænke-Slagskib\obj\Debug\net5.0\Sænke-Slagskib.AssemblyInfoInputs.cache
 C:\Users\danie\source\repos\Sænke-Slagskib\Sænke-Slagskib\obj\Debug\net5.0\Sænke-Slagskib.AssemblyInfo.cs
@@ -30,3 +29,4 @@ C:\Users\dani479g\source\repos\S-nke-Slagskib\Sænke-Slagskib\obj\Debug\net5.0\S
 C:\Users\dani479g\source\repos\S-nke-Slagskib\Sænke-Slagskib\obj\Debug\net5.0\ref\Sænke-Slagskib.dll
 C:\Users\dani479g\source\repos\S-nke-Slagskib\Sænke-Slagskib\obj\Debug\net5.0\Sænke-Slagskib.pdb
 C:\Users\dani479g\source\repos\S-nke-Slagskib\Sænke-Slagskib\obj\Debug\net5.0\Sænke-Slagskib.genruntimeconfig.cache
+C:\Users\danie\source\repos\Sænke-Slagskib\Sænke-Slagskib\obj\Debug\net5.0\Sænke-Slagskib.csproj.AssemblyReference.cache
