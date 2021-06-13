@@ -26,7 +26,7 @@ namespace Sænke_Slagskib
                 player.Board[coordinate] = "occupied";
             }
 
-            Logic.Players.Where(x => x.Name == player.Name).ToList().ForEach(x=>x=player);
+            GameManager.Players.Where(x => x.Name == player.Name).ToList().ForEach(x=>x=player);
             return player;
         }
         public bool CheckCoordinate(PlayerBoard player, string coordinate)
@@ -58,6 +58,19 @@ namespace Sænke_Slagskib
                 }
             }
             return NumberOfShipPartsLeft;
+        }
+
+        public bool CheckIfOccupied(PlayerBoard player, Ship ship)
+        {
+            foreach (string coordinate in ship.Coordinates)
+            {
+                if (player.Board[coordinate] != "empty")
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

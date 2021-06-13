@@ -15,28 +15,28 @@ namespace Sænke_Slagskib
             
             //One loop for each of the players.
             
-            program.OutputPlayerBoard(Logic.Players[0]);
-            program.OutputPlayerBoard(Logic.Players[1]);
+            program.OutputPlayerBoard(GameManager.Players[0]);
+            program.OutputPlayerBoard(GameManager.Players[1]);
             program.SetUpShips();
 
             //OutPuts the PlayerBoard to the console.
-            program.OutputPlayerBoard(Logic.Players[0]);
-            program.OutputPlayerBoard(Logic.Players[1]);
+            program.OutputPlayerBoard(GameManager.Players[0]);
+            program.OutputPlayerBoard(GameManager.Players[1]);
 
             //While the game is not won by either of the players.
             while (true)
             {
-                foreach (PlayerBoard player in Logic.Players.ToList())
+                foreach (PlayerBoard player in GameManager.Players.ToList())
                 {
                     Console.WriteLine($"{player.Name}'s turn \nWrite the coordinate you want to hit");
                     
                     string coordinate = Console.ReadLine();
                     
-                    Console.WriteLine(Logic.PlayerShoot(player, coordinate));
+                    Console.WriteLine(GameManager.PlayerShoot(player, coordinate));
 
-                    program.OutputPlayerBoard(Logic.Players[0]);
-                    program.OutputPlayerBoard(Logic.Players[1]);
-                    if (Logic.CheckScore(Logic.Players[1]))
+                    program.OutputPlayerBoard(GameManager.Players[0]);
+                    program.OutputPlayerBoard(GameManager.Players[1]);
+                    if (GameManager.CheckScore(GameManager.Players[1]))
                     {
                         Console.WriteLine("Player 1 won");
                         break;
@@ -44,11 +44,11 @@ namespace Sænke_Slagskib
 
                     Console.WriteLine("Plater2's turnv \nWrite the cordinate you want to hit");
                     coordinate = Console.ReadLine();
-                    Console.WriteLine(Logic.PlayerShoot(Logic.Players[1], coordinate));
+                    Console.WriteLine(GameManager.PlayerShoot(GameManager.Players[1], coordinate));
 
-                    program.OutputPlayerBoard(Logic.Players[0]);
-                    program.OutputPlayerBoard(Logic.Players[1]);
-                    if (Logic.CheckScore(Logic.Players[0]))
+                    program.OutputPlayerBoard(GameManager.Players[0]);
+                    program.OutputPlayerBoard(GameManager.Players[1]);
+                    if (GameManager.CheckScore(GameManager.Players[0]))
                     {
                         Console.WriteLine("Player 2 won");
                         break;
@@ -61,12 +61,12 @@ namespace Sænke_Slagskib
 
         private void SetUpShips()
         {
-            foreach (PlayerBoard player in Logic.Players.ToList())
+            foreach (PlayerBoard player in GameManager.Players.ToList())
             {
                 Console.WriteLine($"{player.Name} where to place your ships");
                 
                 //One loop for each ship that will be created for each player, NumberOfShip determines the number of ships on each board.
-                foreach (int shipLength in Logic.LengthOfShips)
+                foreach (int shipLength in GameManager.LengthOfShips)
                 {
                     //List of coordinates for one ship.
                     List<string> shipCoordinates = new List<string>();
@@ -84,7 +84,7 @@ namespace Sænke_Slagskib
                     }
                     
                     //Sets op a ship on the specific player board.
-                    Logic.SetUpShipOnBoard(player, shipCoordinates);
+                    GameManager.SetUpShipOnBoard(player, shipCoordinates);
                 }
             }
         }

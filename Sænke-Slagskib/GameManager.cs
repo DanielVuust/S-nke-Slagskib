@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sænke_Slagskib
 {
-    public static class Logic
+    public static class GameManager
     {
         public static List<PlayerBoard> Players = new List<PlayerBoard>()
         {
@@ -23,11 +23,13 @@ namespace Sænke_Slagskib
 
         public static bool SetUpShipOnBoard(PlayerBoard player, List<string> coordinates)
         {
-            
-            
-            
             Data data = new Data();
             Ship ship = new Ship(coordinates);
+            
+            if (!ShipPlacementIsAcceptable(player, ship))
+            {
+                return false;
+            }
             
             //Converts all the coordinates to upper.
             coordinates = coordinates.ConvertAll(x => x.ToUpper());
@@ -37,6 +39,7 @@ namespace Sænke_Slagskib
             
             //Makes a new playerBoard and changes the board
             player = data.UpdatePlayerBoard(player, ship);
+            
             
             
             
@@ -77,6 +80,17 @@ namespace Sænke_Slagskib
             {
                 return false;
             }
+        }
+
+        private static bool ShipPlacementIsAcceptable(PlayerBoard player, Ship ship )
+        {
+            Data data = new Data();
+            if (data.CheckIfOccupied(player, ship))
+            {
+                
+            }
+            
+            return true;
         }
     }
 }
