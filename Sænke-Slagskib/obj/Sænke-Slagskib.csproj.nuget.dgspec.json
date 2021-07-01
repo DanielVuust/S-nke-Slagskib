@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dani479g\\source\\repos\\S-nke-Slagskib\\Sænke-Slagskib\\Sænke-Slagskib.csproj": {}
+    "C:\\Users\\dani479g\\source\\repos\\S-nke-Slagskib\\Ny mappe\\Sænke-Slagskib\\Sænke-Slagskib.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dani479g\\source\\repos\\S-nke-Slagskib\\Sænke-Slagskib\\Sænke-Slagskib.csproj": {
+    "C:\\Users\\dani479g\\source\\repos\\S-nke-Slagskib\\Ny mappe\\Sænke-Slagskib\\Sænke-Slagskib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dani479g\\source\\repos\\S-nke-Slagskib\\Sænke-Slagskib\\Sænke-Slagskib.csproj",
+        "projectUniqueName": "C:\\Users\\dani479g\\source\\repos\\S-nke-Slagskib\\Ny mappe\\Sænke-Slagskib\\Sænke-Slagskib.csproj",
         "projectName": "Sænke-Slagskib",
-        "projectPath": "C:\\Users\\dani479g\\source\\repos\\S-nke-Slagskib\\Sænke-Slagskib\\Sænke-Slagskib.csproj",
+        "projectPath": "C:\\Users\\dani479g\\source\\repos\\S-nke-Slagskib\\Ny mappe\\Sænke-Slagskib\\Sænke-Slagskib.csproj",
         "packagesPath": "C:\\Users\\dani479g\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dani479g\\source\\repos\\S-nke-Slagskib\\Sænke-Slagskib\\obj\\",
+        "outputPath": "C:\\Users\\dani479g\\source\\repos\\S-nke-Slagskib\\Ny mappe\\Sænke-Slagskib\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

@@ -21,15 +21,17 @@ namespace Sænke_Slagskib
             2,
         };
 
+        //Sets of the ships on the board if the places is empty else returns false.
         public static bool SetUpShipOnBoard(PlayerBoard player, List<string> coordinates)
         {
             Data data = new Data();
             Ship ship = new Ship(coordinates);
             
-            if (!ShipPlacementIsAcceptable(player, ship))
+            if (!data.ShipPlacementIsAcceptable(player, ship))
             {
                 return false;
             }
+            
             
             //Converts all the coordinates to upper.
             coordinates = coordinates.ConvertAll(x => x.ToUpper());
@@ -40,23 +42,30 @@ namespace Sænke_Slagskib
             //Makes a new playerBoard and changes the board
             player = data.UpdatePlayerBoard(player, ship);
             
-            
-            
-            
             //Returns true that signifies that the ship creation was successfully.
             return true;
         }
 
-        public static string PlayerShoot(PlayerBoard player, string coordinate)
+        public static string PlayerShoot(string attackingPlayerName, string coordinate)
         {
             
             Data data = new Data();
-
-            player = data.Shoot(player, coordinate);
-
-            Players[Players.FindIndex(x => x.Name.Equals(player.Name))] = player;
             
-            if (data.CheckCoordinate(player, coordinate))
+            
+            PlayerBoard playerBeingAttacked;
+            //Gets the player that is being attacked by using the player that is attacking.
+            if (attackingPlayerName == "player1") {
+                playerBeingAttacked = Players[Players.FindIndex(x => x.Name.Equals("player2"))];
+            }
+            else{ 
+                playerBeingAttacked = Players[Players.FindIndex(x => x.Name.Equals("player1"))];
+            }
+            //Gets the playerBoard and the coordinate for the shot and makes a new playerBoard wither a hit or miss.
+            PlayerBoard newPlayerBoard = data.Shoot(playerBeingAttacked, coordinate);
+            Players[Players.FindIndex(x => x.Name.Equals("player1"))] = newPlayerBoard;
+            
+            //Checks if the player has been hit or it was a miss.
+            if (data.CheckCoordinate(playerBeingAttacked, coordinate))               
             {
                 return "HIT on " + coordinate;
             }
@@ -65,14 +74,14 @@ namespace Sænke_Slagskib
                 return "Miss on " + coordinate;
             }
         }
-        private static int ShipPartsLeft(PlayerBoard player)
+        private static int GetShipPartsLeft(PlayerBoard player)
         {
             Data data = new Data();
             return data.ShipPartsLeft(player);
         }
-        public static bool CheckScore(PlayerBoard player)
+        public static bool CheckWin(PlayerBoard player)
         {
-            if (ShipPartsLeft(player) <= 0)
+            if (GetShipPartsLeft(player) <= 0)
             {
                 return true;
             }
@@ -82,15 +91,6 @@ namespace Sænke_Slagskib
             }
         }
 
-        private static bool ShipPlacementIsAcceptable(PlayerBoard player, Ship ship )
-        {
-            Data data = new Data();
-            if (data.CheckIfOccupied(player, ship))
-            {
-                
-            }
-            
-            return true;
-        }
+        
     }
 }

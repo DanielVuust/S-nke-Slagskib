@@ -33,34 +33,47 @@ namespace Sænke_Slagskib
         {
             return player.Board[coordinate] == "hit";
         }
-        public PlayerBoard Shoot(PlayerBoard player, string coordinate)
+        //Updates the playerBoard on the specific player and returns the updated playerBoard.
+        public PlayerBoard Shoot(PlayerBoard playerBoard, string coordinate)
         {
-            switch (player.Board[coordinate])
+            switch (playerBoard.Board[coordinate])
             {
                 case "occupied":
-                    player.Board[coordinate] = "hit";
+                    playerBoard.Board[coordinate] = "hit";
                     break;
                 case "empty":
-                    player.Board[coordinate] = "miss";
+                    playerBoard.Board[coordinate] = "miss";
                     break;
             }
-            return player;
+            return playerBoard;
         }
        
         public int ShipPartsLeft(PlayerBoard player)
         {
-            int NumberOfShipPartsLeft = 0;
+            int numberOfShipPartsLeft = 0;
+            //Loops through all of the coordinates in the player board and finds all of the ones whom are occupied.
             foreach (KeyValuePair<string, string> coordinate in player.Board)
             {
                 if(coordinate.Value == "occupied")
                 {
-                    NumberOfShipPartsLeft++;
+                    numberOfShipPartsLeft++;
                 }
             }
-            return NumberOfShipPartsLeft;
+            return numberOfShipPartsLeft;
         }
 
-        public bool CheckIfOccupied(PlayerBoard player, Ship ship)
+        public bool ShipPlacementIsAcceptable(PlayerBoard player, Ship ship )
+        {
+            
+            if (CheckIfOccupied(player, ship)) {
+                return false;
+            }
+            
+            return true;
+        }
+        
+
+        private bool CheckIfOccupied(PlayerBoard player, Ship ship)
         {
             foreach (string coordinate in ship.Coordinates)
             {

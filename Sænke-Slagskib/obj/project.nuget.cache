@@ -1,12 +1,8 @@
 {
   "version": 2,
-<<<<<<< Updated upstream
-  "dgSpecHash": "GRHqkNtCod9vRtSm/wbfcXi8KjspDDHn+6RUoRSOwUOfCFyE1mVm255KM8F1qNQXAMC8Lq/1R1fZoAtwvmC0bA==",
-=======
-  "dgSpecHash": "IsfeFaHxgJZcBWH0vrbaw7VvNfN5zbj695iWp6ND+7XMwJTzRR1ulLjENKTuZIG58+MX2Z0NxpKfTj9aMWFLtQ==",
->>>>>>> Stashed changes
+  "dgSpecHash": "TH5EbJy5ANML+F1lJohaiEWFlidRfSFFw8qSCms35D0J2WxdldA//c1vTt6nYj/GYatzypbuRUigPh2kfeDY9g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dani479g\\source\\repos\\S-nke-Slagskib\\Sænke-Slagskib\\Sænke-Slagskib.csproj",
+  "projectFilePath": "C:\\Users\\dani479g\\source\\repos\\S-nke-Slagskib\\Ny mappe\\Sænke-Slagskib\\Sænke-Slagskib.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

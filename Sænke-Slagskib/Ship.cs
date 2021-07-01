@@ -8,7 +8,8 @@ namespace Sænke_Slagskib
 {
     public class Ship
     {
-        public readonly List<string> Coordinates= new List<string>();
+        public readonly List<string> Coordinates;
+        
         public Ship(List<string> coordinates)
         {
             this.Coordinates = coordinates;

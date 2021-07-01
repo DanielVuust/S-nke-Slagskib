@@ -11,10 +11,7 @@ namespace Sænke_Slagskib
             
             Program program = new Program();
             
-            
-            
             //One loop for each of the players.
-            
             program.OutputPlayerBoard(GameManager.Players[0]);
             program.OutputPlayerBoard(GameManager.Players[1]);
             program.SetUpShips();
@@ -32,27 +29,19 @@ namespace Sænke_Slagskib
                     
                     string coordinate = Console.ReadLine();
                     
-                    Console.WriteLine(GameManager.PlayerShoot(player, coordinate));
+                    Console.WriteLine(GameManager.PlayerShoot(player.Name, coordinate));
 
                     program.OutputPlayerBoard(GameManager.Players[0]);
                     program.OutputPlayerBoard(GameManager.Players[1]);
-                    if (GameManager.CheckScore(GameManager.Players[1]))
+                    
+                    //Checks if either one of the player has o ship parts left.
+                    if (GameManager.CheckWin(GameManager.Players[1]))
                     {
                         Console.WriteLine("Player 1 won");
                         break;
                     }
 
-                    Console.WriteLine("Plater2's turnv \nWrite the cordinate you want to hit");
-                    coordinate = Console.ReadLine();
-                    Console.WriteLine(GameManager.PlayerShoot(GameManager.Players[1], coordinate));
-
-                    program.OutputPlayerBoard(GameManager.Players[0]);
-                    program.OutputPlayerBoard(GameManager.Players[1]);
-                    if (GameManager.CheckScore(GameManager.Players[0]))
-                    {
-                        Console.WriteLine("Player 2 won");
-                        break;
-                    }
+                    
                 }
             }
 
@@ -61,6 +50,7 @@ namespace Sænke_Slagskib
 
         private void SetUpShips()
         {
+            //One loop for each of the players in the game.
             foreach (PlayerBoard player in GameManager.Players.ToList())
             {
                 Console.WriteLine($"{player.Name} where to place your ships");
@@ -68,6 +58,7 @@ namespace Sænke_Slagskib
                 //One loop for each ship that will be created for each player, NumberOfShip determines the number of ships on each board.
                 foreach (int shipLength in GameManager.LengthOfShips)
                 {
+                playerCoordinates:    
                     //List of coordinates for one ship.
                     List<string> shipCoordinates = new List<string>();
 
@@ -83,8 +74,13 @@ namespace Sænke_Slagskib
                         shipCoordinates.Add(shipCoordinate);
                     }
                     
-                    //Sets op a ship on the specific player board.
-                    GameManager.SetUpShipOnBoard(player, shipCoordinates);
+                    
+                    //Sets op a ship on the specific player board if the space is not occupied, if the space is occupied then it will return false.
+                    if (GameManager.SetUpShipOnBoard(player, shipCoordinates) == false) {
+                        Console.WriteLine("You can't place a ship on top of another ship. \n Try Again");
+                        goto playerCoordinates;
+                    }
+                    
                 }
             }
         }
